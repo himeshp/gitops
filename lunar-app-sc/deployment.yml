@@ -5,7 +5,7 @@ metadata:
     app: lunar-app-sc
   name: lunar-app-sc
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: lunar-app-sc
@@ -16,7 +16,7 @@ spec:
         app: lunar-app-sc
     spec:
       containers:
-      - image: himeshp/lunar-app:v1
+      - image: himeshp/lunar-app:v2
         name: lunar-app
         imagePullPolicy: Always
         ports: 
