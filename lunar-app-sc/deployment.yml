@@ -5,7 +5,7 @@ metadata:
     app: lunar-app-sc
   name: lunar-app-sc
 spec:
-  replicas: 4
+  replicas: 3
   selector:
     matchLabels:
       app: lunar-app-sc
