@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: lunar-app
-  name: lunar-app
+    app: lunar-app-sc
+  name: lunar-app-sc
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: lunar-app
+      app: lunar-app-sc
   strategy: {}
   template:
     metadata:
       labels:
-        app: lunar-app
+        app: lunar-app-sc
     spec:
       containers:
-      - image: lunar-app:latest
-        name: lunar-app
+      - image: lunar-app-sc:latest
+        name: lunar-app-sc
         imagePullPolicy: Always
         ports: 
         - containerPort: 3000

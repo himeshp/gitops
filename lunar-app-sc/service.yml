@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: lunar-app
-  name: lunar-app-service
+    app: lunar-app-sc
+  name: lunar-app-sc-service
 spec:
   ports:
   - port: 3000
     protocol: TCP
     targetPort: 3000
   selector:
-    app: lunar-app
+    app: lunar-app-sc
   type: NodePort
