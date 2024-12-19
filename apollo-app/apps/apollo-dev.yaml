@@ -7,7 +7,7 @@ spec:
     name: in-cluster
     namespace: dev
   source:
-    path: charts/apollo
+    path: apollo-app/charts/apollo
     repoURL: https://github.com/himeshp/gitops.git
     targetRevision: HEAD
     helm:
