@@ -10,7 +10,7 @@ spec:
   groups:
   - name: argocd.rules
     rules:
-    - alert: ArgoApplicationOutOfSync
+    - alert: ArgoAppOutOfSync
       annotations:
         summary: "'{{ $labels.name }}' Application has synchronization issue"
       expr: argocd_app_info{sync_status="OutOfSync"} == 1
