@@ -5,7 +5,7 @@ metadata:
     app: apollo-app
   name: apollo-app
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.backend.replicaCount }}
   selector:
     matchLabels:
       app: apollo-app
@@ -15,10 +15,10 @@ spec:
         app: apollo-app
     spec:
       containers:
-      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+      - image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
         name: apollo-app
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
         ports: 
-        - containerPort: {{ .Values.service.targetPort }}
+        - containerPort: {{ .Values.backend.service.targetPort }}
         resources:
-          {{- toYaml .Values.resources | nindent 12 }}
+          {{- toYaml .Values.backend.resources | nindent 12 }}

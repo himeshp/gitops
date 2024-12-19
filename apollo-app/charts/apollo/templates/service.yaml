@@ -6,9 +6,9 @@ metadata:
   name: apollo-app-service
 spec:
   ports:
-  - port: {{ .Values.service.port }}
+  - port: {{ .Values.backend.service.port }}
     protocol: TCP
-    targetPort: {{ .Values.service.targetPort }}
+    targetPort: {{ .Values.backend.service.targetPort }}
   selector:
     app: apollo-app
-  type: {{ .Values.service.type }}
+  type: {{ .Values.backend.service.type }}
