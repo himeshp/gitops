@@ -1,0 +1,61 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: argocd-alerts
+  namespace: monitoring
+  labels:
+    app: kube-prometheus-stack
+    release: my-kube-prometheus-stack
+spec:
+  groups:
+  - name: argocd.rules
+    rules:
+    - alert: ArgoApplicationOutOfSync
+      annotations:
+        summary: "'{{ $labels.name }}' Application has synchronization issue"
+        description: "Application {{ $labels.name }} is out of sync with its target state"
+      expr: argocd_app_info{sync_status="OutOfSync"} == 1
+      for: 1m
+      labels:
+        severity: warning
+    - alert: ArgoApplicationHealthDegraded
+      annotations:
+        description: "Application {{ $labels.name }} in namespace {{ $labels.namespace }} has degraded health status"
+        summary: "'{{ $labels.name }}' Application health is degraded"
+      expr: argocd_app_info{health_status="Degraded"} == 1
+      for: 5m
+      labels:
+        severity: warning
+    - alert: ArgoApplicationMissing
+      annotations:
+        description: "Application is not present in ArgoCD, possible deletion or configuration issue"
+        summary: "Application is missing from ArgoCD"
+      expr: |
+        absent(argocd_app_info)
+      for: 5m
+      labels:
+        severity: warning
+    - alert: ArgoControllerError
+      annotations:
+        description: "ArgoCD Controller has encountered errors in the last 5 minutes"
+        summary: "ArgoCD Controller experiencing errors"
+      expr: sum(increase(argocd_app_controller_errors_total[5m])) > 0
+      for: 5m
+      labels:
+        severity: warning
+    - alert: ArgoRepoServerError
+      annotations:
+        description: "ArgoCD Repo Server has encountered errors in the last 5 minutes"
+        summary: "ArgoCD Repo Server experiencing errors"
+      expr: sum(increase(argocd_repo_server_request_total{status_code=~"5.*"}[5m])) > 0
+      for: 5m
+      labels:
+        severity: warning
+    - alert: ArgoApplicationSyncFailed
+      annotations:
+        description: "ArgoCD application sync operations have failed in the last 5 minutes"
+        summary: "Application sync operations failing"
+      expr: sum(increase(argocd_app_sync_total{phase="Failed"}[5m])) > 0
+      for: 5m
+      labels:
+        severity: warning

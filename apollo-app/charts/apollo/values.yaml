@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: himeshp/lunar-app
+  tag: v2
+  pullPolicy: Always
+
+service:
+  type: NodePort
+  port: 3001
+  targetPort: 3001
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
