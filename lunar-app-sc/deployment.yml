@@ -16,7 +16,7 @@ spec:
         app: lunar-app-sc
     spec:
       containers:
-      - image: himeshp/lunar-app:v
+      - image: himeshp/lunar-app:v1
         name: lunar-app
         imagePullPolicy: Always
         ports: 
